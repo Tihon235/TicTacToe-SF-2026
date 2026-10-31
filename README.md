@@ -5,7 +5,8 @@
 обработкой событий и игровой логикой.
 
 ## 📸 Скриншот игры
-![Скриншот игры](<img width="413" height="425" alt="ScreenshotGame" src="https://github.com/user-attachments/assets/840e686c-6f54-44bc-ae6e-4cf57aa87dd6" />)
+<img width="413" height="425" alt="ScreenshotGame" src="https://github.com/user-attachments/assets/2f3ba2e0-abbd-432f-b0fb-2d5f5e76f670" />
+
 
 ## 🚀 Как запустить игру
 
@@ -40,4 +41,5 @@
 
 
 ---
+Проект был разработан студентом-программистом НИЯУ МИФИ.
 *Проект создан в рамках вебинара по программированию. Удачи в игре!*
