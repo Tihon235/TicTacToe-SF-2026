@@ -6,8 +6,9 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using WindowsFormsApplication1.Properties;
 
-namespace Tic_tac_toe
+namespace WindowsFormsApplication1
 {
     public partial class Form1 : Form
     {
@@ -19,9 +20,10 @@ namespace Tic_tac_toe
         public Form1()
         {
             InitializeComponent();
+            UpdateTurnLabel();
         }
 
-        private void pic1_Click(object sender, EventArgs e)
+        private void pictureBox1_Cliсk(object sender, EventArgs e)
         {
             PictureBox clickedBox = (PictureBox)sender;
             //Проверяем наличие изобрадение в PictorBox
@@ -29,35 +31,52 @@ namespace Tic_tac_toe
             //Проверяем ход и ставим соотвествующую картинку
             if (isCrossClick == true)
             {
-                clickedBox.Image = Properties.Resources.cross_red;
+                clickedBox.Image = Resources.cross_red;
                 clickedBox.Tag = "X";
+
             }
-            else {
-                clickedBox.Image = Properties.Resources.circle_blue;
+            else
+            {
+                clickedBox.Image = Resources.circle_blue;
                 clickedBox.Tag = "O";
             }
             //Меняем ход
             isCrossClick = !isCrossClick;
+            UpdateTurnLabel();
             if (CheckWinner()) return;
         }
 
+        //Функция обновления текста для хода
+        private void UpdateTurnLabel()
+        {
+            if (isCrossClick)
+            {
+                label3.Text = "Ходят: Крестики";
+            }
+            else
+            {
+                label3.Text = "Ходят: Нолики";
+            }
+        }
+
         //Функция проверки победы
-        private bool CheckWinner() {
+        private bool CheckWinner()
+        {
             //Проверка горизонтали
-            if (CheckLine(pic1, pic2, pic3)) return true;
-            if (CheckLine(pic4, pic5, pic6)) return true;
-            if (CheckLine(pic7, pic8, pic9)) return true;
+            if (CheckLine(pictureBox1, pictureBox2, pictureBox3)) return true;
+            if (CheckLine(pictureBox4, pictureBox5, pictureBox6)) return true;
+            if (CheckLine(pictureBox7, pictureBox8, pictureBox9)) return true;
             //Проверка вертикали
-            if (CheckLine(pic1, pic4, pic7)) return true;
-            if (CheckLine(pic2, pic5, pic8)) return true;
-            if (CheckLine(pic3, pic6, pic9)) return true;
+            if (CheckLine(pictureBox1, pictureBox4, pictureBox7)) return true;
+            if (CheckLine(pictureBox2, pictureBox5, pictureBox8)) return true;
+            if (CheckLine(pictureBox3, pictureBox6, pictureBox9)) return true;
             //Проверка диагоналей
-            if (CheckLine(pic1, pic5, pic9)) return true;
-            if (CheckLine(pic3, pic5, pic7)) return true;
+            if (CheckLine(pictureBox1, pictureBox5, pictureBox9)) return true;
+            if (CheckLine(pictureBox3, pictureBox5, pictureBox7)) return true;
             //Проверка на ничью
-            if (pic1.Image != null && pic2.Image != null && pic3.Image != null &&
-                pic4.Image != null && pic5.Image != null && pic6.Image != null &&
-                pic7.Image != null && pic8.Image != null && pic9.Image != null) 
+            if (pictureBox1.Image != null && pictureBox2.Image != null && pictureBox3.Image != null &&
+                pictureBox4.Image != null && pictureBox5.Image != null && pictureBox6.Image != null &&
+                pictureBox7.Image != null && pictureBox8.Image != null && pictureBox9.Image != null)
             {
                 MessageBox.Show("Ничья! Очки никому не начисляются.");
                 ResetGame();
@@ -65,7 +84,8 @@ namespace Tic_tac_toe
             }
             else return false;
         }
-        private bool CheckLine(PictureBox pb1, PictureBox pb2, PictureBox pb3) {
+        private bool CheckLine(PictureBox pb1, PictureBox pb2, PictureBox pb3)
+        {
             //Проверка победы
             if (pb1.Tag != null && pb1.Tag == pb2.Tag && pb2.Tag == pb3.Tag)
             {
@@ -80,7 +100,7 @@ namespace Tic_tac_toe
                 {
                     scoreO++;
                 }
-                labelScore.Text = "Крестики: " + scoreX + " | Нолики: " + scoreO;
+                label2.Text = "Крестики: " + scoreX + " | Нолики: " + scoreO;
                 //Проверка победителя матча
                 if (scoreX >= 3 || scoreO >= 3)
                 {
@@ -112,30 +132,33 @@ namespace Tic_tac_toe
                         Application.Exit();
                     }
                 }
-                 return true;
+                return true;
             }
             return false;
         }
         //Сброс сессии
-        private void ResetSession() {
+        private void ResetSession()
+        {
             scoreX = 0;
             scoreO = 0;
-            labelScore.Text = "Крестики: 0 | Нолики: 0";
+            label2.Text = "Крестики: 0 | Нолики: 0";
             ResetGame();
         }
         //Перезапуск игры
-        private void ResetGame() {
-            pic1.Image = null; pic1.Tag = null;
-            pic2.Image = null; pic2.Tag = null;
-            pic3.Image = null; pic3.Tag = null;
-            pic4.Image = null; pic4.Tag = null;
-            pic5.Image = null; pic5.Tag = null;
-            pic6.Image = null; pic6.Tag = null;
-            pic7.Image = null; pic7.Tag = null;
-            pic8.Image = null; pic8.Tag = null;
-            pic9.Image = null; pic9.Tag = null;
+        private void ResetGame()
+        {
+            pictureBox1.Image = null; pictureBox1.Tag = null;
+            pictureBox2.Image = null; pictureBox2.Tag = null;
+            pictureBox3.Image = null; pictureBox3.Tag = null;
+            pictureBox4.Image = null; pictureBox4.Tag = null;
+            pictureBox5.Image = null; pictureBox5.Tag = null;
+            pictureBox6.Image = null; pictureBox6.Tag = null;
+            pictureBox7.Image = null; pictureBox7.Tag = null;
+            pictureBox8.Image = null; pictureBox8.Tag = null;
+            pictureBox9.Image = null; pictureBox9.Tag = null;
             //Обновляем флаг
             isCrossClick = true;
+            UpdateTurnLabel();
         }
     }
 }
